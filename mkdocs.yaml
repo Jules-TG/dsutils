@@ -1,0 +1,24 @@
+site_name: dsutils
+site_dir: site
+docs_dir: docs
+
+theme:
+  name: zensical
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [./src]
+          options:
+            heading_level: 3
+            show_root_heading: true
+            show_root_toc_entry: true
+            docstring_style: google
+            show_source: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Reference: api.md

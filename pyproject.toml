@@ -1,0 +1,33 @@
+[project]
+name = "dsutils"
+version = "0.1.0"
+description = "Jules Stremersch's library of assorted reusable Python code for working with data"
+readme = "README.md"
+requires-python = ">=3.14"
+license = {text = "MIT"}
+authors = [
+    {name = "Jules Stremersch", email = "jules.stremersch@technopolis-group.com"}
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+dependencies = [
+]
+
+[project.optional-dependencies]
+api = ["requests>=2.34.2"]
+io = []
+llm = [
+    "openai>=2.41.1",
+    "pydantic>=2.13.4",
+]
+dev = [
+    "dotenv>=0.9.9",
+    "mkdocs>=1.6.1",
+    "mkdocstrings>=1.0.4",
+    "mkdocstrings-python>=2.0.3",
+    "pytest>=9.0.3",
+    "zensical>=0.0.43",
+]

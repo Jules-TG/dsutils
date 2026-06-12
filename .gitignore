@@ -1,0 +1,75 @@
+# Operating System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environment Variables / Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Testing and Coverage
+.cache
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+.htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output files
+*.csv
+*.xlsx
+*.json
+*.parquet
+
+# Auto-generated documentation site
+site/
+
