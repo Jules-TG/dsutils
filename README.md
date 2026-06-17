@@ -35,5 +35,5 @@ To run the documentation locally:
 ```
 source .venv/bin/activate
 uv pip install -e ".[dev]"
-zensical serve
+uv run zensical serve
 ```

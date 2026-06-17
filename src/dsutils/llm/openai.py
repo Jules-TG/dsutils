@@ -5,6 +5,21 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 
+def get_openai_client(base_url: str, openai_token: str, max_retries: int = 5) -> OpenAI:
+    """Initialise and return a synchronous OpenAI client.
+
+    Args:
+        base_url: The endpoint URL.
+        openai_token: The API key or token for authentication.
+        max_retries: Maximum number of retry attempts for failed
+            requests.
+
+    Returns:
+        A configured ``OpenAI`` client instance.
+    """
+    return OpenAI(base_url=base_url, api_key=openai_token, max_retries=max_retries)
+
+
 def get_token_cost(token_count: int, token_type: str, model: str) -> float:
     """Calculate the estimated USD cost for a given token usage.
 
@@ -28,6 +43,7 @@ def get_token_cost(token_count: int, token_type: str, model: str) -> float:
         )
 
     # Prices in USD
+    # TODO - Implement more complete and robust pricing
     prices = {"gpt-5.4-nano": {"input": 0.2, "output": 1.25}}
 
     model_prices = prices.get(model)
@@ -35,22 +51,6 @@ def get_token_cost(token_count: int, token_type: str, model: str) -> float:
     cost_per_m = model_prices[token_type]
 
     return (token_count * cost_per_m) / 1_000_000
-
-
-def get_openai_client(base_url: str, openai_token: str) -> OpenAI:
-    """Initialise and return a synchronous OpenAI client.
-
-    Args:
-        base_url: The endpoint URL.
-        openai_token: The API key or token for authentication.
-
-    Returns:
-        A configured ``OpenAI`` client instance.
-    """
-    return OpenAI(
-        base_url=base_url,
-        api_key=openai_token,
-    )
 
 
 def request_openai_response(
@@ -92,11 +92,8 @@ def request_openai_response(
         UserWarning: If the response was truncated due to hitting
             ``max_tokens``.
     """  # noqa: E501
-    # TODO Implement type inference for output
-    if temperature > 2.0 or temperature < 0.0:
-        raise ValueError(
-            f"Invalid temperature: {temperature}, which must be between 0 and 1"
-        )
+    if temperature is not None and not (0.0 <= temperature <= 2.0):
+        raise ValueError(f"Invalid temperature: {temperature}, must be between 0 and 2")
 
     if reasoning_effort not in ["none", "minimal", "low", "medium", "high", "xhigh"]:
         raise ValueError(f"Invalid reasoning effort: {reasoning_effort}")
