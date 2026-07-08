@@ -73,3 +73,6 @@ coverage.xml
 # Auto-generated documentation site
 site/
 
+# Testing
+Models/*
+
