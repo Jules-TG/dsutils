@@ -26,7 +26,7 @@ uv add "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.0"
 ### Ad-hoc install
 
 ```
-uv pip install "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.0"
+uv pip install "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"
 ```
 
 ## Documentation
