@@ -1,5 +1,5 @@
 """
-Jules Stremersch's library of assorted reusable Python code for working with data
+Library of assorted reusable Python code for working with data
 """
 
 __version__ = "0.1.0"
