@@ -13,5 +13,5 @@
 ## io
 :::dsutils.io.json
 
-## opena
-:::dsutils.llm.openai
+## openai
+:::dsutils.openai.client

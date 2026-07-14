@@ -40,7 +40,7 @@ def _parse_retry_after(response: requests.Response) -> int:
                 remote_time = time.time()
 
             return max(int(float(reset_timestamp) - remote_time), 1) + 1
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             pass
 
     return 0
