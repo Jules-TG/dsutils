@@ -11,4 +11,6 @@
 
 :::dsutils.io
 
+:::dsutils.new_project
+
 :::dsutils.openai
