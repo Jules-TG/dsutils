@@ -14,13 +14,13 @@ Add to your `pyproject.toml`:
 
 ```toml
 [project]
-dependencies = ["dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.0"]
+dependencies = ["dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"]
 ```
 
 Or with `uv`:
 
 ```
-uv add "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.0"
+uv add "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"
 ```
 
 ### Ad-hoc install
