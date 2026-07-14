@@ -1,6 +1,9 @@
 # API Reference
 
 
+## ai
+:::dsutils.ai.clustering
+
 ## api
 :::dsutils.api.client
 
@@ -10,5 +13,5 @@
 ## io
 :::dsutils.io.json
 
-## llm
+## opena
 :::dsutils.llm.openai
