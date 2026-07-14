@@ -1,17 +1,14 @@
 # API Reference
 
 
-## ai
-:::dsutils.ai.clustering
+:::dsutils.ai
 
-## api
-:::dsutils.api.client
+:::dsutils.api
 
-## data
-:::dsutils.data.collections
+:::dsutils.constants
 
-## io
-:::dsutils.io.json
+:::dsutils.data
 
-## openai
-:::dsutils.openai.client
+:::dsutils.io
+
+:::dsutils.openai
