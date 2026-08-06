@@ -346,8 +346,8 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--python",
-        default="3.11",
-        help="Minimum Python version (default: 3.11)",
+        default="3.14.4",
+        help="Minimum Python version (default: 3.14.4)",
     )
     parser.add_argument(
         "--license",
