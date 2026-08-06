@@ -28,3 +28,19 @@ dev = [
     "zensical>=0.0.43",
 ]
 ai = ["sentence-transformers>=5.6.0", "torch>=2.12.1"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N"]
+unfixable = ["F401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+preview = true

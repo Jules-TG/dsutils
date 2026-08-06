@@ -97,8 +97,6 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/{package_name}"]
 
-# Ruff is configured in the project's ruff.toml.
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
@@ -107,6 +105,22 @@ addopts = "-ra"
 python_version = "{python_version}"
 strict = true
 files = ["src", "tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N"]
+unfixable = ["F401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+preview = true
 '''
 
 
@@ -201,27 +215,6 @@ coverage.xml
 """
 
 
-def _render_ruff_toml(python_version: str) -> str:
-    """Return a standalone ruff.toml pinned to the project's Python version."""
-    target = "py" + python_version.replace(".", "")
-    return f'''line-length = 88
-target-version = "{target}"
-
-[lint]
-# Enable specific rule sets (e.g., Pyflakes, Rule/Error, Isort, Naming)
-select = ["E", "F", "I", "N"]
-unfixable = ["F401"]
-
-[lint.pydocstyle]
-convention = "google"
-
-[format]
-quote-style = "double"
-indent-style = "space"
-preview = true
-'''
-
-
 def _render_readme(dist_name: str, package_name: str, description: str) -> str:
     """Return the README.md contents."""
     return f"""# {dist_name}
@@ -258,6 +251,15 @@ def _render_test(package_name: str) -> str:
 def test_version() -> None:
     assert isinstance(__version__, str)
 """
+
+
+def _render_main() -> str:
+    """Return a scaffold main file"""
+    return """def main():
+    pass
+
+if __name__ == "__main__":
+    main()"""
 
 
 def _render_proprietary_license(year: int, company: str) -> str:
@@ -415,6 +417,9 @@ def create_project(argv: list[str] | None = None) -> int:
     src_pkg.mkdir(parents=True, exist_ok=True)
     tests_dir.mkdir(parents=True, exist_ok=True)
 
+    scripts_dir = root / "scripts"
+    scripts_dir.mkdir(parents=True, exist_ok=True)
+
     print(f"Scaffolding '{dist_name}' at {root}")
 
     _write(
@@ -430,13 +435,14 @@ def create_project(argv: list[str] | None = None) -> int:
         ),
     )
     _write(root / ".gitignore", _render_gitignore())
-    _write(root / "ruff.toml", _render_ruff_toml(args.python))
     _write(
         root / "README.md", _render_readme(dist_name, package_name, args.description)
     )
     _write(src_pkg / "__init__.py", '__version__ = "0.1.0"\n')
     _write(tests_dir / "__init__.py", "")
     _write(tests_dir / f"test_{package_name}.py", _render_test(package_name))
+    _write(scripts_dir / "main.py", _render_main())
+    _write(scripts_dir / "data_exploration.ipynb", "")
 
     if lic == "proprietary":
         _write(root / "LICENSE", _render_proprietary_license(year, company))
