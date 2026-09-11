@@ -44,7 +44,10 @@ def get_token_cost(token_count: int, token_type: str, model: str) -> float:
 
     # Prices in USD
     # TODO - Implement more complete and robust pricing
-    prices = {"gpt-5.4-nano": {"input": 0.2, "output": 1.25}}
+    prices = {
+        "gpt-5.4-nano": {"input": 0.2, "output": 1.25},
+        "gpt-5-nano": {"input": 0.05, "output": 0.4},
+    }
 
     model_prices = prices.get(model)
 

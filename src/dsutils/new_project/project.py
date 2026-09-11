@@ -211,6 +211,8 @@ coverage.xml
 *.db
 *.sqlite
 *.sqlite3
+*.duckdb
+*.wal
 
 """
 
@@ -438,6 +440,7 @@ def create_project(argv: list[str] | None = None) -> int:
     _write(
         root / "README.md", _render_readme(dist_name, package_name, args.description)
     )
+
     _write(src_pkg / "__init__.py", '__version__ = "0.1.0"\n')
     _write(tests_dir / "__init__.py", "")
     _write(tests_dir / f"test_{package_name}.py", _render_test(package_name))

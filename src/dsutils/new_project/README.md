@@ -17,7 +17,7 @@ Adding an alias means you can just type `new-project` from anywhere.
 Add the following to `~/.zshrc` (zsh) or `~/.bashrc` (bash):
 
 ```bash
-alias new-project="python3 /Users/julesstremersch/GitHub/dsutils/src/dsutils/new_project/project.py"
+alias new-project="python3 /Your/Path/To/dsutils/src/dsutils/new_project/project.py"
 ```
 
 Then reload your shell:
@@ -63,7 +63,7 @@ Create a `new-project.bat` file somewhere on your `PATH` containing:
 @echo off
 python "%USERPROFILE%\GitHub\dsutils\src\dsutils\new_project\project.py" %*
 ```
-
+> Windows instructions were AI generated still need to be tested
 ## Running via uv
 
 If you manage `dsutils` with uv, you can point the shortcut at uv instead so the

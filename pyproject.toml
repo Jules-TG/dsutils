@@ -44,3 +44,8 @@ convention = "google"
 quote-style = "double"
 indent-style = "space"
 preview = true
+
+[dependency-groups]
+dev = [
+    "pandas>=3.0.5",
+]
