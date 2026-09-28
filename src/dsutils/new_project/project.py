@@ -226,7 +226,7 @@ def _render_readme(dist_name: str, package_name: str, description: str) -> str:
 ## Installation
 
 ```bash
-pip install -e ".[dev]"
+uv pip install -e ".[dev]"
 ```
 
 ## Usage
