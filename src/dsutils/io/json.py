@@ -47,5 +47,8 @@ def save_json(file_path: Path | str, data: JSON_DATA_TYPES, indent: int = 2) -> 
             UserWarning,
         )
 
-    with open(file_path, "w") as file:
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(path, "w") as file:
         json.dump(data, file, indent=indent)
