@@ -2,8 +2,9 @@
 """Scaffold a new Python project with a modern src layout.
 
 Creates a parent directory named after the project, containing a
-``pyproject.toml``, a ``ruff.toml``, a ``.gitignore``, a ``src/<package>``
-package, a ``tests`` directory, a ``README.md``, and a ``LICENSE`` file.
+``pyproject.toml``, a ``ruff.toml``, a ``.gitignore``, a ``.gitattributes``
+(nbstripout), a ``src/<package>`` package, a ``tests`` directory, a
+``README.md``, and a ``LICENSE`` file.
 
 By default the project is treated as private company code: it ships a
 proprietary "all rights reserved" notice and a ``Private :: Do Not Upload``
@@ -75,6 +76,8 @@ def _render_pyproject(
         meta += f'license = "{license_id}"\n'
         meta += 'license-files = ["LICENSE"]\n'
 
+    mypy_version = ".".join(python_version.split(".")[:2])
+
     return f'''[build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -92,6 +95,8 @@ dev = [
     "pytest>=8",
     "ruff>=0.6",
     "mypy>=1.10",
+    "ipykernel>=7",
+    "nbstripout>=0.9",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -102,13 +107,14 @@ testpaths = ["tests"]
 addopts = "-ra"
 
 [tool.mypy]
-python_version = "{python_version}"
+python_version = "{mypy_version}"
 strict = true
 files = ["src", "tests"]
 
 [tool.ruff]
 line-length = 88
 target-version = "py314"
+extend-exclude = ["*.ipynb"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N"]
@@ -260,8 +266,29 @@ def _render_main() -> str:
     return """def main():
     pass
 
+
 if __name__ == "__main__":
-    main()"""
+    main()
+"""
+
+
+def _render_notebook() -> str:
+    """Return an empty but valid Jupyter notebook."""
+    return """{
+ "cells": [],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
+"""
+
+
+def _render_gitattributes() -> str:
+    """Return a .gitattributes that strips notebook outputs via nbstripout."""
+    return """*.ipynb filter=nbstripout
+*.zpln filter=nbstripout
+*.ipynb diff=ipynb
+"""
 
 
 def _render_proprietary_license(year: int, company: str) -> str:
@@ -445,7 +472,8 @@ def create_project(argv: list[str] | None = None) -> int:
     _write(tests_dir / "__init__.py", "")
     _write(tests_dir / f"test_{package_name}.py", _render_test(package_name))
     _write(scripts_dir / "main.py", _render_main())
-    _write(scripts_dir / "data_exploration.ipynb", "")
+    _write(scripts_dir / "data_exploration.ipynb", _render_notebook())
+    _write(root / ".gitattributes", _render_gitattributes())
 
     if lic == "proprietary":
         _write(root / "LICENSE", _render_proprietary_license(year, company))
@@ -467,6 +495,8 @@ def create_project(argv: list[str] | None = None) -> int:
     print(f"  cd {dist_name}")
     print("  uv venv --python 3.14.4 .venv && source .venv/bin/activate")
     print('  uv pip install -e ".[dev]"')
+    if not args.no_git:
+        print("  nbstripout --install  # registers the git filter")
     return 0
 
 
