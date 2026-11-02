@@ -18,6 +18,7 @@ dependencies = []
 [project.optional-dependencies]
 api = ["requests>=2.34.2"]
 io = []
+mcda = ["pandas>=3.0.5"]
 openai = ["openai>=2.41.1", "pydantic>=2.13.4"]
 dev = [
     "dotenv>=0.9.9",
