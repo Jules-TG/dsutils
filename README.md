@@ -20,13 +20,19 @@ dependencies = ["dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"]
 Or with `uv`:
 
 ```
-uv add "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"
+uv add "dsutils @ git+https://github.com/Jules-TG/dsutils@v0.2.0"
+```
+
+Installing only modules you require (recommended
+
+```
+uv add "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.2.0"
 ```
 
 ### Ad-hoc install
 
 ```
-uv pip install "dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"
+uv pip install "dsutils @ git+https://github.com/Jules-TG/dsutils@v0.1.1"
 ```
 
 ## Documentation
