@@ -14,7 +14,7 @@ Add to your `pyproject.toml`:
 
 ```toml
 [project]
-dependencies = ["dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.1.1"]
+dependencies = ["dsutils[api] @ git+https://github.com/Jules-TG/dsutils@v0.2.0"]
 ```
 
 Or with `uv`:
